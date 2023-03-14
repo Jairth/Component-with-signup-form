@@ -1,0 +1,262 @@
+//mixins
+@import "mixins.scss";
+
+//Variables
+$Red: hsl(0, 100%, 74%);
+$Green: hsl(154, 59%, 51%);
+$Blue: hsl(248, 32%, 49%);
+$Dark-Blue: hsl(249, 10%, 26%);
+$Grayish-Blue: hsl(246, 25%, 77%);
+$White: hsl(0, 0%, 100%);
+
+
+
+.component__signup {
+  @include flexible(flex, row, nowrap, center, center);
+  padding: 2em 0;
+
+  @media (max-width:1024px) {
+    flex-flow: column nowrap;
+    gap: 3.5em;
+  }
+}
+
+.text {
+  @include flexible(flex, column, nowrap, center, flex-start);
+  flex: 1;
+  gap: 2em;
+  &__title {
+    color: $White;
+    font-size: clamp(1.7em, 3.5vw, 3em);
+    font-weight: 700;
+    line-height: 1.1em;
+    opacity: 0;
+    width: 80%;
+    animation: moveDown .7s cubic-bezier(.34,.63,.86,1.45) .2s forwards;
+
+    @keyframes moveDown {
+      from{
+        transform: translateY(-200%);
+        opacity: 0;
+      }
+      50%{
+        opacity: 0.5;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__paragraph {
+    color: $White;
+    font-size: clamp(0.9em, 2vw, 1em);
+    font-weight: 400;
+    opacity: 0;
+    width: 90%;
+    animation: moveUp .7s cubic-bezier(.34,.63,.86,1.45) .5s forwards;
+
+    @keyframes moveUp {
+      from{
+        transform: translateY(200%);
+        opacity: 0;
+      }
+      50%{
+        opacity: 0.5;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (max-width:1024px) {
+    align-items: center;
+
+    &__title, &__paragraph {
+      text-align: center;
+    }
+  }
+
+  @media (max-width:450px) {
+    gap: 1.5em;
+  }
+}
+
+.form {
+  @include flexible(flex, column, nowrap, center, center);
+  flex: 1;
+  gap: 1.6em;
+  padding: 0 3.5em;
+
+  @media (max-width:767px) {
+    padding: 0;
+  }
+
+  &__text {
+    background-color: $Blue;
+    width: 100%;
+    padding: 1em 2em;
+    border-radius: .6em;
+    opacity: 0;
+    box-shadow: 0 8px 0 rgba($color: #0b0b0b, $alpha: 0.15);
+    animation: moveLeft .7s cubic-bezier(.34,.63,.86,1.45) 1.5s forwards;
+
+    @keyframes moveLeft {
+      from{
+        transform: translateX(200%);
+        opacity: 0;
+      }
+      50%{
+        opacity: 0.5;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__title {
+    text-align: center;
+    color: $White;
+    font-size: 1em;
+    font-weight: 300;
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  &__wrapper {
+    @include flexible(flex, column, nowrap, center, center);
+    background-color: $White;
+    width: 100%;
+    border-radius: .6em;
+    box-shadow: 0 8px 0 rgba($color: #0b0b0b, $alpha: 0.17);
+    opacity: 0;
+    gap: 1em;
+    padding: 2.5em;
+    animation: moveRight .7s cubic-bezier(.34,.63,.86,1.45) .8s forwards;
+
+    @media (max-width:450px) {
+      padding: 1.6em;
+    }
+
+    @keyframes moveRight {
+      from{
+        transform: translateX(-200%);
+        opacity: 0;
+      }
+      50%{
+        opacity: 0.5;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__input {
+      width: 100%;
+      border: 1px solid hsla(246, 25%, 77%, 0.387);
+      border-radius: .3em;
+      outline: none;
+      padding: 1em 2em;
+
+      &::placeholder {
+        font-size: 1em;
+        font-weight: 600;
+        color: hsl(249, 10%, 26%,0.75);
+      }
+
+      &:focus {
+        border: 1px solid #0b0b0b;
+      }
+
+      &:focus::placeholder {
+        color: $White
+      }
+
+      &:invalid  {
+        border:1px solid $Red;
+        color: $Red
+      }
+  }
+
+  &__validate {
+    @include flexible(flex, column, nowrap, center, center);
+    width: 100%;
+    gap: 1em;
+  }
+
+  &__name-wrap, &__lastname-wrap, &__email-wrap, &__password-wrap {
+    width: 100%;
+  }
+
+  &__name, &__lastname, &__email, &__password  {
+    position: relative;
+  }
+
+  &__svg {
+    display: none;
+    width: 1.6em;
+    position: absolute;
+    top: 25%;
+    right: 5%;
+  }
+
+  &__invalid {
+    display: none;
+    text-align: right;
+    font-size: .75em;
+    font-weight: 500;
+    font-style: italic;
+    color: $Red;
+  }
+
+  &__svg.show, &__invalid.show {
+    display: block;
+  }
+
+  &__input.show {
+    border:1px solid $Red;
+    color: $Red;
+
+    &::placeholder {
+      color: $Red;
+    }
+  }
+
+  &__submit {
+    width: 100%;
+    background-color: $Green;
+    font-size: .95em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: $White;
+    border-radius: .3em;
+    box-shadow: inset 0 -4px 0 rgba($color: #0b0b0b, $alpha: 0.1);
+    padding: 1em 2em;
+  }
+
+  &__terms {
+    font-size: .73em;
+    font-weight: 500;
+    text-align: center;
+    color: hsla(246, 25%, 77%, 0.9);
+
+    strong {
+      color: $Red;
+      font-weight: 700;
+    }
+  }
+
+  &__claim {
+    font-size: 1.3em;
+    text-align: center;
+  }
+}

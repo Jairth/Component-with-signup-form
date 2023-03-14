@@ -1,0 +1,6 @@
+@mixin flexible ($dis, $direct, $corte, $just, $align ) {
+  display: $dis;
+  flex-flow: $direct $corte;
+  justify-content: $just;
+  align-items: $align;
+}
